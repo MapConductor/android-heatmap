@@ -67,7 +67,7 @@ kotlin {
 }
 
 dependencies {
-    debugImplementation(project(":mapconductor-core"))
+    debugImplementation(project(":android-sdk-core"))
     releaseImplementation("com.mapconductor:core:$coreLibraryVersion")
 
     // Coroutines for debounce and coordination
