@@ -29,4 +29,4 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "mapconductor-heatmap"
+rootProject.name = "android-heatmap"
