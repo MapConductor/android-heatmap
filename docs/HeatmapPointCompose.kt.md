@@ -1,18 +1,15 @@
-Of course! Here is the high-quality SDK documentation for the provided Kotlin code snippet.
+These composable functions add data points to a `HeatmapOverlay`. All variants must be placed
+within the `content` block of a `HeatmapOverlay` to function correctly.
 
 ---
 
-# Heatmap Points
+# HeatmapPoint
 
-These composable functions are used to add data points to a `HeatmapOverlay`. Each point has a geographical position and an optional weight that determines its intensity on the heatmap.
+Adds a single weighted geographical point to the heatmap. The point is added to the map when
+the composable enters the composition and removed when it leaves.
 
-All `HeatmapPoint` and `HeatmapPoints` composables must be placed within the content of a `<HeatmapOverlay />` to function correctly.
+## Signature
 
-### HeatmapPoint
-
-Adds a single, weighted geographical point to the heatmap. This is the standard method for adding individual points declaratively. The point is automatically added to the map when the composable enters the composition and removed when it leaves.
-
-#### Signature
 ```kotlin
 @Composable
 fun MapViewScope.HeatmapPoint(
@@ -23,41 +20,40 @@ fun MapViewScope.HeatmapPoint(
 )
 ```
 
-#### Description
-Use this composable to represent a single data point on the heatmap. You can specify its location, intensity (weight), and optional metadata. For rendering a large number of points, consider using the `HeatmapPoints` composable for better performance.
+## Description
 
-#### Parameters
+Use this composable to represent a single data point on the heatmap. For large datasets, prefer
+`HeatmapPoints` for better performance.
 
-| Parameter  | Type                | Default | Description                                                                                             |
-|------------|---------------------|---------|---------------------------------------------------------------------------------------------------------|
-| `position` | `GeoPointInterface` | -       | The geographical location of the heatmap point.                                                         |
-| `weight`   | `Double`            | `1.0`   | The intensity of the point. Higher values contribute more to the heatmap's "heat" in that area.         |
-| `id`       | `String?`           | `null`  | An optional unique identifier for the point. Useful for managing or referencing specific points.        |
-| `extra`    | `Serializable?`     | `null`  | Optional, serializable data to associate with the point. Can be used to store custom metadata.          |
+## Parameters
 
-#### Example
+- `position`
+    - Type: `GeoPointInterface`
+    - Description: **Required.** The geographical location of the heatmap point.
+- `weight`
+    - Type: `Double`
+    - Default: `1.0`
+    - Description: The intensity of the point. Higher values contribute more heat to that area.
+- `id`
+    - Type: `String?`
+    - Default: `null`
+    - Description: An optional unique identifier for the point.
+- `extra`
+    - Type: `Serializable?`
+    - Default: `null`
+    - Description: Optional serializable metadata to associate with the point.
 
-Here's how to add two distinct heatmap points inside a `HeatmapOverlay`.
+## Example
 
 ```kotlin
-import com.mapconductor.heatmap.HeatmapOverlay
-import com.mapconductor.heatmap.HeatmapPoint
-import com.mapconductor.geo.GeoPoint // Assuming a GeoPoint implementation
-
-// ...
-
-MapView {
+// Replace "MapView" with semantic SDK mapview such as "GoogleMapView"
+MapView(state = mapViewState) {
     HeatmapOverlay {
-        // Add a point with default weight
+        HeatmapPoint(position = GeoPoint(40.7128, -74.0060))
         HeatmapPoint(
-            position = GeoPoint(40.7128, -74.0060) // New York City
-        )
-
-        // Add another point with a higher weight
-        HeatmapPoint(
-            position = GeoPoint(34.0522, -118.2437), // Los Angeles
+            position = GeoPoint(34.0522, -118.2437),
             weight = 3.5,
-            id = "la-point"
+            id = "la-point",
         )
     }
 }
@@ -65,73 +61,59 @@ MapView {
 
 ---
 
-### HeatmapPoints
+# HeatmapPoints
 
-Efficiently renders a list of heatmap points. This composable is optimized for large datasets, as it updates the entire collection of points in a single operation, avoiding the performance overhead of adding each point individually.
+Efficiently renders a list of heatmap points in a single operation. Optimized for large or
+dynamic datasets where adding points individually would be too slow.
 
-#### Signature
+## Signature
+
 ```kotlin
 @Composable
 fun MapViewScope.HeatmapPoints(states: List<HeatmapPointState>)
 ```
 
-#### Description
-When you have a dynamic or large list of points, use `HeatmapPoints` to render them. On its initial composition and whenever the `states` list changes, it replaces all existing points in the overlay with the new list. When this composable leaves the composition, it automatically clears all points it was managing.
+## Description
 
-> **Note:** This function replaces the entire set of points on the map. It does not append to any existing points added by other `HeatmapPoint` or `HeatmapPoints` composables.
+On initial composition and whenever `states` changes, this composable replaces all existing
+points in the overlay with the new list. When it leaves the composition, all managed points are
+automatically cleared.
 
-#### Parameters
+> **Note:** This function replaces the entire set of points. It does not append to points added
+> by other `HeatmapPoint` or `HeatmapPoints` composables.
 
-| Parameter | Type                      | Description                                                              |
-|-----------|---------------------------|--------------------------------------------------------------------------|
-| `states`  | `List<HeatmapPointState>` | The complete list of `HeatmapPointState` objects to display on the heatmap. |
+## Parameters
 
-#### Example
+- `states`
+    - Type: `List<HeatmapPointState>`
+    - Description: **Required.** The complete list of `HeatmapPointState` objects to display.
 
-This example demonstrates how to display a list of points fetched from a ViewModel.
+## Example
 
 ```kotlin
-import com.mapconductor.heatmap.HeatmapOverlay
-import com.mapconductor.heatmap.HeatmapPoints
-import com.mapconductor.heatmap.HeatmapPointState
-import com.mapconductor.geo.GeoPoint // Assuming a GeoPoint implementation
-
-// In your ViewModel or state holder
-val heatmapData = remember {
-    mutableStateOf(
-        listOf(
-            HeatmapPointState(position = GeoPoint(48.8566, 2.3522), weight = 2.0), // Paris
-            HeatmapPointState(position = GeoPoint(51.5074, -0.1278), weight = 1.5), // London
-            HeatmapPointState(position = GeoPoint(41.9028, 12.4964)) // Rome (default weight 1.0)
-        )
-    )
-}
-
-// In your Composable
-MapView {
+GoogleMapView(state = mapViewState) {
     HeatmapOverlay {
-        HeatmapPoints(states = heatmapData.value)
+        HeatmapPoints(states = heatmapPointStates)
     }
 }
 ```
 
 ---
 
-### HeatmapPoint (State-based)
+# HeatmapPoint (State-based)
 
-A lower-level composable that adds a single heatmap point using a pre-constructed `HeatmapPointState` object.
+A lower-level composable that adds a single heatmap point from a pre-constructed
+`HeatmapPointState`. Typically used when the state is managed externally.
 
-#### Signature
+## Signature
+
 ```kotlin
 @Composable
 fun MapViewScope.HeatmapPoint(state: HeatmapPointState)
 ```
 
-#### Description
-This variant is typically used internally or for advanced use cases where you manage the `HeatmapPointState` directly. For most scenarios, the overload that accepts individual parameters (`position`, `weight`, etc.) is more convenient.
+## Parameters
 
-#### Parameters
-
-| Parameter | Type                | Description                                      |
-|-----------|---------------------|--------------------------------------------------|
-| `state`   | `HeatmapPointState` | The state object representing the heatmap point. |
+- `state`
+    - Type: `HeatmapPointState`
+    - Description: **Required.** The state object representing the heatmap point.

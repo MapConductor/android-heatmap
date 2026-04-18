@@ -1,14 +1,11 @@
-Of course! Here is the high-quality SDK documentation for the provided code snippet.
-
----
-
 # HeatmapCameraController
 
-## Description
+A lightweight controller that links map camera movements to a `HeatmapTileRenderer`. It listens
+for camera position changes and forwards the current zoom level to the renderer, allowing the
+heatmap's appearance to adapt dynamically as the user zooms.
 
-A specialized controller that links map camera movements to a `HeatmapTileRenderer`. Its primary function is to listen for changes in the map's camera position and update the heatmap renderer with the new zoom level. This allows the heatmap's appearance (e.g., tile resolution or intensity) to be adjusted dynamically as the user zooms in or out.
-
-This controller implements `OverlayControllerInterface` but is designed to be lightweight. It does not manage individual data points, state, or click events, focusing solely on camera event handling.
+This controller implements `OverlayControllerInterface` but is focused solely on camera event
+handling. It does not manage data points, state, or click events.
 
 ## Signature
 
@@ -20,73 +17,53 @@ class HeatmapCameraController(
 
 ## Constructor
 
-### `HeatmapCameraController(renderer: HeatmapTileRenderer)`
+### `HeatmapCameraController(renderer)`
 
 Creates an instance of `HeatmapCameraController`.
 
-#### Parameters
+**Parameters**
 
-| Name     | Type                  | Description                                                              |
-| :------- | :-------------------- | :----------------------------------------------------------------------- |
-| `renderer` | `HeatmapTileRenderer` | The heatmap renderer instance that will be updated with camera zoom changes. |
-
----
+- `renderer`
+    - Type: `HeatmapTileRenderer`
+    - Description: **Required.** The heatmap renderer to update with camera zoom changes.
 
 ## Methods
 
 ### `onCameraChanged`
 
-Called by the map framework whenever the camera position changes. This method extracts the zoom level from the `mapCameraPosition` and passes it to the associated `HeatmapTileRenderer` to update its state.
+Called by the map framework whenever the camera position changes. Extracts the zoom level from
+the new camera position and passes it to the `HeatmapTileRenderer`.
 
-#### Signature
+**Signature**
 
 ```kotlin
 override suspend fun onCameraChanged(mapCameraPosition: MapCameraPosition)
 ```
 
-#### Parameters
+**Parameters**
 
-| Name                | Type                | Description                                        |
-| :------------------ | :------------------ | :------------------------------------------------- |
-| `mapCameraPosition` | `MapCameraPosition` | The new position and zoom level of the map camera. |
+- `mapCameraPosition`
+    - Type: `MapCameraPosition`
+    - Description: The new position and zoom level of the map camera.
 
----
+## Interface Methods (no-op)
 
-## Interface Methods
+The following methods from `OverlayControllerInterface` are implemented as no-ops. This
+controller's scope is limited to camera handling.
 
-The following methods from `OverlayControllerInterface` are implemented but have no effect, as this controller's scope is limited to camera handling.
-
-| Method                                | Description                                      |
-| :------------------------------------ | :----------------------------------------------- |
-| `add(data: List<Unit>)`               | No-op. Does not add data to the overlay.         |
-| `update(state: Unit)`                 | No-op. Does not update the overlay's state.      |
-| `clear()`                             | No-op. Does not clear any data.                  |
-| `find(position: GeoPointInterface)`   | No-op. Always returns `null`.                    |
-| `destroy()`                           | No-op. No native resources to clean up.          |
-
----
+- `add(data: List<Unit>)` — Does not add data to the overlay.
+- `update(state: Unit)` — Does not update any state.
+- `clear()` — Does not clear any data.
+- `find(position: GeoPointInterface)` — Always returns `null`.
+- `destroy()` — No native resources to clean up.
 
 ## Example
 
-The following example demonstrates how to initialize and use the `HeatmapCameraController` with a `HeatmapTileRenderer`.
-
 ```kotlin
-// Assume 'heatmapDataPoints' is a list of geographical points for the heatmap
-// and 'context' is an Android Context.
+val renderer = HeatmapTileRenderer()
+val cameraController = HeatmapCameraController(renderer)
 
-// 1. Initialize the components needed for the heatmap renderer.
-//    (HeatmapTileProvider is a hypothetical class that provides tile data).
-val tileProvider = HeatmapTileProvider(heatmapDataPoints)
-val heatmapRenderer = HeatmapTileRenderer(context, tileProvider)
-
-// 2. Create the camera controller, linking it to the renderer.
-val heatmapCameraController = HeatmapCameraController(heatmapRenderer)
-
-// 3. Add the controller to the map's overlay management system.
-//    (This is a hypothetical example of how it might be used with a map view).
-mapView.overlayManager.addController(heatmapCameraController)
-
-// Now, whenever the user zooms or pans the map, the map framework will call
-// heatmapCameraController.onCameraChanged. This automatically updates the
-// heatmapRenderer with the new zoom level, allowing it to render appropriate tiles.
+// The controller is registered with the map internally by HeatmapOverlay.
+// When the user zooms or pans, onCameraChanged is called automatically,
+// updating the renderer with the new zoom level.
 ```
