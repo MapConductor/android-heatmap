@@ -56,7 +56,6 @@ android {
     }
 }
 
-
 dependencies {
     if (findProject(":android-sdk-core") != null) {
         implementation(project(":android-sdk-core"))
@@ -152,7 +151,6 @@ publishing {
                         ?: System.getenv("GITHUB_TOKEN")
             }
         }
-
     }
 }
 
@@ -174,4 +172,3 @@ if (project == rootProject) {
         }
     }
 }
-
