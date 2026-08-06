@@ -5,12 +5,12 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.compositionLocalOf
 import com.mapconductor.compose.MapViewScope
-import com.mapconductor.core.ChildCollector
+import com.mapconductor.core.OverlayCollectorInterface
 import com.mapconductor.core.features.GeoPointInterface
 import java.io.Serializable
 
 val LocalHeatmapPointCollector =
-    compositionLocalOf<ChildCollector<HeatmapPointState>> {
+    compositionLocalOf<OverlayCollectorInterface<HeatmapPointState>> {
         error("HeatmapPoint must be under the <HeatmapOverlay />")
     }
 
