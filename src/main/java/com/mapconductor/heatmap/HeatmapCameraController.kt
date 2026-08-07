@@ -7,7 +7,8 @@ import com.mapconductor.core.map.MapCameraPosition
 
 class HeatmapCameraController(
     private val renderer: HeatmapTileRenderer,
-) : OverlayControllerInterface<Unit, Unit>, OnCameraChangeReceiverInterface {
+) : OverlayControllerInterface<Unit, Unit>,
+    OnCameraChangeReceiverInterface {
     override val zIndex: Int = 0
 
     override suspend fun add(data: List<Unit>) {}
