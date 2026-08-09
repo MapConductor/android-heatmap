@@ -38,7 +38,6 @@ public final class com.mapconductor.heatmap.HeatmapCameraController implements c
   public void destroy();
   public boolean has(java.lang.String);
   public void setClickListenerAny(java.lang.Object);
-  public com.mapconductor.core.controller.OverlayKind getKind();
   public java.lang.Object update(java.lang.Object, kotlin.coroutines.Continuation);
   public java.lang.Object find(com.mapconductor.core.features.GeoPointInterface);
 }
