@@ -1,0 +1,411 @@
+public final class com.mapconductor.heatmap.Bounds {
+  public com.mapconductor.heatmap.Bounds(double, double, double, double);
+  public final double getMinX();
+  public final double getMaxX();
+  public final double getMinY();
+  public final double getMaxY();
+  public final boolean intersects(com.mapconductor.heatmap.Bounds);
+  public final double component1();
+  public final double component2();
+  public final double component3();
+  public final double component4();
+  public final com.mapconductor.heatmap.Bounds copy(double, double, double, double);
+  public java.lang.String toString();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+}
+final class com.mapconductor.heatmap.ColorInterval {
+  public com.mapconductor.heatmap.ColorInterval(int, int, float);
+  public final int getColor1();
+  public final int getColor2();
+  public final float getDuration();
+  public final int component1();
+  public final int component2();
+  public final float component3();
+  public final com.mapconductor.heatmap.ColorInterval copy(int, int, float);
+  public java.lang.String toString();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+}
+public final class com.mapconductor.heatmap.HeatmapCameraController implements com.mapconductor.core.controller.OverlayControllerInterface<kotlin.Unit, kotlin.Unit>, com.mapconductor.core.controller.OnCameraChangeReceiverInterface {
+  public com.mapconductor.heatmap.HeatmapCameraController(com.mapconductor.heatmap.HeatmapTileRenderer);
+  public int getZIndex();
+  public java.lang.Object add(java.util.List<kotlin.Unit>, kotlin.coroutines.Continuation<? super kotlin.Unit>);
+  public java.lang.Object update(kotlin.Unit, kotlin.coroutines.Continuation<? super kotlin.Unit>);
+  public java.lang.Object clear(kotlin.coroutines.Continuation<? super kotlin.Unit>);
+  public kotlin.Unit find(com.mapconductor.core.features.GeoPointInterface);
+  public java.lang.Object onCameraChanged(com.mapconductor.core.map.MapCameraPosition, kotlin.coroutines.Continuation<? super kotlin.Unit>);
+  public void destroy();
+  public java.lang.Object update(java.lang.Object, kotlin.coroutines.Continuation);
+  public java.lang.Object find(com.mapconductor.core.features.GeoPointInterface);
+}
+public final class com.mapconductor.heatmap.HeatmapColorMap {
+  public static final com.mapconductor.heatmap.HeatmapColorMap INSTANCE;
+  public static final int COLOR_MAP_SIZE;
+  public final int[] build(com.mapconductor.heatmap.HeatmapGradient);
+  public final int[] generate(int[], float[], int);
+  public final int interpolateColor(int, int, float);
+}
+public final class com.mapconductor.heatmap.HeatmapDefaults {
+  public static final com.mapconductor.heatmap.HeatmapDefaults INSTANCE;
+  public static final int DEFAULT_RADIUS_PX;
+  public static final double DEFAULT_OPACITY;
+  public static final int DEFAULT_MAX_ZOOM;
+}
+public final class com.mapconductor.heatmap.HeatmapGradient {
+  public static final com.mapconductor.heatmap.HeatmapGradient$Companion Companion;
+  public com.mapconductor.heatmap.HeatmapGradient(java.util.List<com.mapconductor.heatmap.HeatmapGradientStop>);
+  public final java.util.List<com.mapconductor.heatmap.HeatmapGradientStop> getStops();
+  public final int[] colors();
+}
+public final class com.mapconductor.heatmap.HeatmapGradient$Companion {
+  public final com.mapconductor.heatmap.HeatmapGradient getDEFAULT();
+}
+public final class com.mapconductor.heatmap.HeatmapGradientStop {
+  public com.mapconductor.heatmap.HeatmapGradientStop(double, int);
+  public final double getPosition();
+  public final int getColor();
+  public final double component1();
+  public final int component2();
+  public final com.mapconductor.heatmap.HeatmapGradientStop copy(double, int);
+  public java.lang.String toString();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+}
+public final class com.mapconductor.heatmap.HeatmapIntensity {
+  public static final com.mapconductor.heatmap.HeatmapIntensity INSTANCE;
+  public static final int MAX_ZOOM_LEVEL;
+  public final double[] getMaxIntensities(java.util.List<com.mapconductor.heatmap.WeightedPoint>, com.mapconductor.heatmap.Bounds, int, java.lang.Double);
+  public final double getMaxValue(java.util.List<com.mapconductor.heatmap.WeightedPoint>, com.mapconductor.heatmap.Bounds, int, int);
+}
+public final class com.mapconductor.heatmap.HeatmapKernel {
+  public static final com.mapconductor.heatmap.HeatmapKernel$Companion Companion;
+  public com.mapconductor.heatmap.HeatmapKernel();
+  public final float[] resolveKernel(int);
+  public final float[] generateKernel(int, double);
+  public final void convolveSparseToOutput(float[], float[], float[], float[], int, int, int, int[], int, int[], kotlin.jvm.functions.Function1<? super java.lang.Integer, kotlin.Unit>);
+}
+public final class com.mapconductor.heatmap.HeatmapKernel$Companion {
+}
+public final class com.mapconductor.heatmap.HeatmapOverlayKt {
+  public static final void HeatmapOverlay(com.mapconductor.compose.MapViewScope, com.mapconductor.heatmap.HeatmapOverlayState, kotlin.jvm.functions.Function2<? super androidx.compose.runtime.Composer, ? super java.lang.Integer, kotlin.Unit>, androidx.compose.runtime.Composer, int);
+  public static final void HeatmapOverlay(com.mapconductor.compose.MapViewScope, int, double, com.mapconductor.heatmap.HeatmapGradient, java.lang.Double, kotlin.jvm.functions.Function1<? super com.mapconductor.heatmap.HeatmapPointState, java.lang.Double>, int, boolean, boolean, kotlin.jvm.functions.Function2<? super androidx.compose.runtime.Composer, ? super java.lang.Integer, kotlin.Unit>, androidx.compose.runtime.Composer, int, int);
+}
+public final class com.mapconductor.heatmap.HeatmapOverlayState {
+  public com.mapconductor.heatmap.HeatmapOverlayState(int, double, com.mapconductor.heatmap.HeatmapGradient, java.lang.Double, kotlin.jvm.functions.Function1<? super com.mapconductor.heatmap.HeatmapPointState, java.lang.Double>);
+  public com.mapconductor.heatmap.HeatmapOverlayState(int, double, com.mapconductor.heatmap.HeatmapGradient, java.lang.Double, kotlin.jvm.functions.Function1, int, kotlin.jvm.internal.DefaultConstructorMarker);
+  public final int getRadiusPx();
+  public final void setRadiusPx(int);
+  public final double getOpacity();
+  public final void setOpacity(double);
+  public final com.mapconductor.heatmap.HeatmapGradient getGradient();
+  public final void setGradient(com.mapconductor.heatmap.HeatmapGradient);
+  public final java.lang.Double getMaxIntensity();
+  public final void setMaxIntensity(java.lang.Double);
+  public final kotlin.jvm.functions.Function1<com.mapconductor.heatmap.HeatmapPointState, java.lang.Double> getWeightProvider();
+  public final void setWeightProvider(kotlin.jvm.functions.Function1<? super com.mapconductor.heatmap.HeatmapPointState, java.lang.Double>);
+  public final com.mapconductor.heatmap.HeatmapOverlayState copy(int, double, com.mapconductor.heatmap.HeatmapGradient, java.lang.Double, kotlin.jvm.functions.Function1<? super com.mapconductor.heatmap.HeatmapPointState, java.lang.Double>);
+  public com.mapconductor.heatmap.HeatmapOverlayState();
+}
+public final class com.mapconductor.heatmap.HeatmapPhaseTimings {
+  public com.mapconductor.heatmap.HeatmapPhaseTimings();
+  public final double getEffectiveZoom();
+  public final void setEffectiveZoom(double);
+  public final int getRadius();
+  public final void setRadius(int);
+  public final int getGridDim();
+  public final void setGridDim(int);
+  public final boolean getUsedIndex();
+  public final void setUsedIndex(boolean);
+  public final int getIndexGridSize();
+  public final void setIndexGridSize(int);
+  public final int getIndexNonEmptyBuckets();
+  public final void setIndexNonEmptyBuckets(int);
+  public final int getIndexMaxBucketSize();
+  public final void setIndexMaxBucketSize(int);
+  public final int getXRanges();
+  public final void setXRanges(int);
+  public final int getCellsVisited();
+  public final void setCellsVisited(int);
+  public final int getCandidatesVisited();
+  public final void setCandidatesVisited(int);
+  public final int getPointsBinned();
+  public final void setPointsBinned(int);
+  public final double getSetupMs();
+  public final void setSetupMs(double);
+  public final double getBinMs();
+  public final void setBinMs(double);
+  public final double getConvolveMs();
+  public final void setConvolveMs(double);
+  public final double getPngMs();
+  public final void setPngMs(double);
+  public final int getPngLevel();
+  public final void setPngLevel(int);
+  public final void reset();
+  public final java.lang.String format();
+}
+public final class com.mapconductor.heatmap.HeatmapPoint implements java.io.Serializable {
+  public com.mapconductor.heatmap.HeatmapPoint(com.mapconductor.core.features.GeoPointInterface, double);
+  public com.mapconductor.heatmap.HeatmapPoint(com.mapconductor.core.features.GeoPointInterface, double, int, kotlin.jvm.internal.DefaultConstructorMarker);
+  public final com.mapconductor.core.features.GeoPointInterface getPosition();
+  public final double getWeight();
+  public final com.mapconductor.core.features.GeoPointInterface component1();
+  public final double component2();
+  public final com.mapconductor.heatmap.HeatmapPoint copy(com.mapconductor.core.features.GeoPointInterface, double);
+  public java.lang.String toString();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+}
+public final class com.mapconductor.heatmap.HeatmapPointComposeKt {
+  public static final androidx.compose.runtime.ProvidableCompositionLocal<com.mapconductor.core.OverlayCollectorInterface<com.mapconductor.heatmap.HeatmapPointState>> getLocalHeatmapPointCollector();
+  public static final void HeatmapPoint(com.mapconductor.compose.MapViewScope, com.mapconductor.heatmap.HeatmapPointState, androidx.compose.runtime.Composer, int);
+  public static final void HeatmapPoint(com.mapconductor.compose.MapViewScope, com.mapconductor.core.features.GeoPointInterface, double, java.lang.String, java.io.Serializable, androidx.compose.runtime.Composer, int, int);
+  public static final void HeatmapPoints(com.mapconductor.compose.MapViewScope, java.util.List<com.mapconductor.heatmap.HeatmapPointState>, androidx.compose.runtime.Composer, int);
+}
+public final class com.mapconductor.heatmap.HeatmapPointFingerPrint {
+  public com.mapconductor.heatmap.HeatmapPointFingerPrint(int, int, int, int);
+  public final int getId();
+  public final int getPosition();
+  public final int getWeight();
+  public final int getExtra();
+  public final int component1();
+  public final int component2();
+  public final int component3();
+  public final int component4();
+  public final com.mapconductor.heatmap.HeatmapPointFingerPrint copy(int, int, int, int);
+  public java.lang.String toString();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+}
+public final class com.mapconductor.heatmap.HeatmapPointState implements com.mapconductor.core.ComponentState {
+  public com.mapconductor.heatmap.HeatmapPointState(com.mapconductor.core.features.GeoPointInterface, double, java.lang.String, java.io.Serializable);
+  public com.mapconductor.heatmap.HeatmapPointState(com.mapconductor.core.features.GeoPointInterface, double, java.lang.String, java.io.Serializable, int, kotlin.jvm.internal.DefaultConstructorMarker);
+  public java.lang.String getId();
+  public final com.mapconductor.core.features.GeoPointInterface getPosition();
+  public final void setPosition(com.mapconductor.core.features.GeoPointInterface);
+  public final double getWeight();
+  public final void setWeight(double);
+  public final java.io.Serializable getExtra();
+  public final void setExtra(java.io.Serializable);
+  public final com.mapconductor.heatmap.HeatmapPointFingerPrint fingerPrint();
+  public final kotlinx.coroutines.flow.Flow<com.mapconductor.heatmap.HeatmapPointFingerPrint> asFlow();
+}
+public final class com.mapconductor.heatmap.HeatmapRenderBuffers {
+  public com.mapconductor.heatmap.HeatmapRenderBuffers();
+  public final int getGridDim();
+  public final void setGridDim(int);
+  public final int getTileSize();
+  public final void setTileSize(int);
+  public final float[] getIntensity();
+  public final void setIntensity(float[]);
+  public final float[] getIntermediate();
+  public final void setIntermediate(float[]);
+  public final float[] getOutput();
+  public final void setOutput(float[]);
+  public final com.mapconductor.heatmap.PngBuffers getPng();
+  public final void setPng(com.mapconductor.heatmap.PngBuffers);
+  public final int[] getNonZeroIntensity();
+  public final void setNonZeroIntensity(int[]);
+  public final int[] getNonZeroIntermediate();
+  public final void setNonZeroIntermediate(int[]);
+  public final int getNonZeroIntensityCount();
+  public final void setNonZeroIntensityCount(int);
+  public final int getNonZeroIntermediateCount();
+  public final void setNonZeroIntermediateCount(int);
+  public final void ensure(int, int);
+}
+public final class com.mapconductor.heatmap.HeatmapTileBinner {
+  public static final com.mapconductor.heatmap.HeatmapTileBinner INSTANCE;
+  public final boolean bin(java.util.List<com.mapconductor.heatmap.WeightedPoint>, com.mapconductor.heatmap.PointIndex, com.mapconductor.heatmap.TileGeometry, com.mapconductor.heatmap.HeatmapRenderBuffers, com.mapconductor.heatmap.HeatmapPhaseTimings);
+}
+public final class com.mapconductor.heatmap.HeatmapTilePipeline {
+  public static final int MAX_RENDER_QUEUE_SIZE;
+  public static final double SLOW_TILE_LOG_THRESHOLD_MS;
+  public static final java.lang.String TAG;
+  public com.mapconductor.heatmap.HeatmapTilePipeline(int, int, int, kotlin.jvm.functions.Function0<byte[]>, kotlin.jvm.functions.Function3<? super com.mapconductor.core.tileserver.TileRequest, ? super com.mapconductor.heatmap.TileState, ? super com.mapconductor.heatmap.HeatmapPhaseTimings, byte[]>);
+  public final void invalidate();
+  public final byte[] request(com.mapconductor.core.tileserver.TileRequest, int, com.mapconductor.heatmap.TileState);
+}
+final class com.mapconductor.heatmap.HeatmapTilePipeline$Companion {
+}
+final class com.mapconductor.heatmap.HeatmapTilePipeline$RenderJob {
+  public final java.lang.String getKey();
+  public final long getEpoch();
+  public final long getEnqueuedAtNs();
+  public final com.mapconductor.core.tileserver.TileRequest getRequest();
+  public final com.mapconductor.heatmap.TileState getState();
+  public final java.util.concurrent.CompletableFuture<byte[]> getFuture();
+  public final java.lang.String component1();
+  public final long component2();
+  public final long component3();
+  public final com.mapconductor.core.tileserver.TileRequest component4();
+  public final com.mapconductor.heatmap.TileState component5();
+  public final java.util.concurrent.CompletableFuture<byte[]> component6();
+  public final com.mapconductor.heatmap.HeatmapTilePipeline$RenderJob copy(java.lang.String, long, long, com.mapconductor.core.tileserver.TileRequest, com.mapconductor.heatmap.TileState, java.util.concurrent.CompletableFuture<byte[]>);
+  public java.lang.String toString();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+}
+public final class com.mapconductor.heatmap.HeatmapTileRenderer implements com.mapconductor.core.tileserver.TileProviderInterface {
+  public static final com.mapconductor.heatmap.HeatmapTileRenderer$Companion Companion;
+  public static final int DEFAULT_TILE_SIZE;
+  public static final int DEFAULT_PNG_COMPRESSION_LEVEL;
+  public com.mapconductor.heatmap.HeatmapTileRenderer(int, int, int, int);
+  public com.mapconductor.heatmap.HeatmapTileRenderer(int, int, int, int, int, kotlin.jvm.internal.DefaultConstructorMarker);
+  public final int getTileSize();
+  public final void update(java.util.List<com.mapconductor.heatmap.HeatmapPoint>, int, com.mapconductor.heatmap.HeatmapGradient, java.lang.Double);
+  public final void updateCameraZoom(double);
+  public byte[] renderTile(com.mapconductor.core.tileserver.TileRequest);
+  public com.mapconductor.heatmap.HeatmapTileRenderer();
+}
+public final class com.mapconductor.heatmap.HeatmapTileRenderer$Companion {
+}
+public final class com.mapconductor.heatmap.HeatmapWorld {
+  public static final com.mapconductor.heatmap.HeatmapWorld INSTANCE;
+  public static final double WORLD_WIDTH;
+  public final java.util.List<com.mapconductor.heatmap.WeightedPoint> buildWeightedPoints(java.util.List<com.mapconductor.heatmap.HeatmapPoint>);
+  public final com.mapconductor.heatmap.WorldPoint toWorldPoint(com.mapconductor.core.features.GeoPointInterface);
+  public final com.mapconductor.heatmap.Bounds calculateBounds(java.util.List<com.mapconductor.heatmap.WeightedPoint>);
+  public final java.util.List<com.mapconductor.heatmap.XRange> buildTileXRanges(double, double);
+  public final com.mapconductor.heatmap.PointIndex buildPointIndex(java.util.List<com.mapconductor.heatmap.WeightedPoint>);
+}
+public final class com.mapconductor.heatmap.PngBuffers {
+  public static final int DEFLATE_BUFFER_BYTES;
+  public static final int OUT_INITIAL_BYTES;
+  public static final int IHDR_BYTES;
+  public com.mapconductor.heatmap.PngBuffers();
+  public final byte[] getRow();
+  public final void setRow(byte[]);
+  public final byte[] getZlibBlockHeader();
+  public final void setZlibBlockHeader(byte[]);
+  public final byte[] getAdlerBuf();
+  public final void setAdlerBuf(byte[]);
+  public final byte[] getDeflateBuf();
+  public final void setDeflateBuf(byte[]);
+  public final java.util.zip.Deflater getDeflater();
+  public final void setDeflater(java.util.zip.Deflater);
+  public final java.util.zip.CRC32 getCrc32();
+  public final void setCrc32(java.util.zip.CRC32);
+  public final java.util.zip.Adler32 getAdler32();
+  public final void setAdler32(java.util.zip.Adler32);
+  public final byte[] getIhdr();
+  public final void setIhdr(byte[]);
+  public final com.mapconductor.heatmap.PngByteBuffer getOut();
+  public final void setOut(com.mapconductor.heatmap.PngByteBuffer);
+  public final void ensureRow(int);
+  public final void ensureOutCapacity(int, int);
+}
+final class com.mapconductor.heatmap.PngBuffers$Companion {
+}
+public final class com.mapconductor.heatmap.PngByteBuffer {
+  public static final int MIN_CAPACITY;
+  public com.mapconductor.heatmap.PngByteBuffer(int);
+  public final int position();
+  public final void reset();
+  public final void ensureCapacity(int);
+  public final void setInt32BE(int, int);
+  public final void writeByte(int);
+  public final void writeInt32BE(int);
+  public final void writeBytes(byte[]);
+  public final void writeBytes(byte[], int, int);
+  public final byte[] toByteArray();
+}
+final class com.mapconductor.heatmap.PngByteBuffer$Companion {
+}
+public final class com.mapconductor.heatmap.PngEncoder {
+  public static final com.mapconductor.heatmap.PngEncoder INSTANCE;
+  public final byte[] encodeFromIntensity(float[], int[], double, int, int, com.mapconductor.heatmap.PngBuffers, int);
+  public final byte[] encodeRgba(int[], int, int, com.mapconductor.heatmap.PngBuffers, int);
+}
+public final class com.mapconductor.heatmap.PointIndex {
+  public com.mapconductor.heatmap.PointIndex(int, int[], int[], int, int);
+  public final int getGridSize();
+  public final int[] getHeads();
+  public final int[] getNext();
+  public final int getNonEmptyBuckets();
+  public final int getMaxBucketSize();
+  public final int component1();
+  public final int[] component2();
+  public final int[] component3();
+  public final int component4();
+  public final int component5();
+  public final com.mapconductor.heatmap.PointIndex copy(int, int[], int[], int, int);
+  public java.lang.String toString();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+}
+public final class com.mapconductor.heatmap.TileGeometry {
+  public com.mapconductor.heatmap.TileGeometry(double, double, double, double, double, int);
+  public final double getMinX();
+  public final double getMaxX();
+  public final double getMinY();
+  public final double getMaxY();
+  public final double getBucketWidth();
+  public final int getGridDim();
+  public final double component1();
+  public final double component2();
+  public final double component3();
+  public final double component4();
+  public final double component5();
+  public final int component6();
+  public final com.mapconductor.heatmap.TileGeometry copy(double, double, double, double, double, int);
+  public java.lang.String toString();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+}
+public final class com.mapconductor.heatmap.TileState {
+  public com.mapconductor.heatmap.TileState(java.util.List<com.mapconductor.heatmap.WeightedPoint>, com.mapconductor.heatmap.PointIndex, com.mapconductor.heatmap.Bounds, int, int[], double[]);
+  public final java.util.List<com.mapconductor.heatmap.WeightedPoint> getPoints();
+  public final com.mapconductor.heatmap.PointIndex getIndex();
+  public final com.mapconductor.heatmap.Bounds getBounds();
+  public final int getRadiusPx();
+  public final int[] getColorMap();
+  public final double[] getMaxIntensities();
+  public final java.util.List<com.mapconductor.heatmap.WeightedPoint> component1();
+  public final com.mapconductor.heatmap.PointIndex component2();
+  public final com.mapconductor.heatmap.Bounds component3();
+  public final int component4();
+  public final int[] component5();
+  public final double[] component6();
+  public final com.mapconductor.heatmap.TileState copy(java.util.List<com.mapconductor.heatmap.WeightedPoint>, com.mapconductor.heatmap.PointIndex, com.mapconductor.heatmap.Bounds, int, int[], double[]);
+  public java.lang.String toString();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+}
+public final class com.mapconductor.heatmap.WeightedPoint {
+  public com.mapconductor.heatmap.WeightedPoint(double, double, double);
+  public final double getX();
+  public final double getY();
+  public final double getIntensity();
+  public final double component1();
+  public final double component2();
+  public final double component3();
+  public final com.mapconductor.heatmap.WeightedPoint copy(double, double, double);
+  public java.lang.String toString();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+}
+public final class com.mapconductor.heatmap.WorldPoint {
+  public com.mapconductor.heatmap.WorldPoint(double, double);
+  public final double getX();
+  public final double getY();
+  public final double component1();
+  public final double component2();
+  public final com.mapconductor.heatmap.WorldPoint copy(double, double);
+  public java.lang.String toString();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+}
+public final class com.mapconductor.heatmap.XRange {
+  public com.mapconductor.heatmap.XRange(double, double, double);
+  public final double getMin();
+  public final double getMax();
+  public final double getOffset();
+  public final double component1();
+  public final double component2();
+  public final double component3();
+  public final com.mapconductor.heatmap.XRange copy(double, double, double);
+  public java.lang.String toString();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+}
