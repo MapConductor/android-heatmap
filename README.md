@@ -7,7 +7,7 @@ It renders heatmap data as a tile-based `RasterLayer` so it works with any map i
 
 ## Setup
 
-https://docs-android.mapconductor.com/setup/
+https://mapconductor.com/setup/
 
 ------------------------------------------------------------------------
 
