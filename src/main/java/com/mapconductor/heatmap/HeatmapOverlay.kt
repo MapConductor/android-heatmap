@@ -51,8 +51,7 @@ fun MapViewScope.HeatmapOverlay(
 ) {
     val pointCollector =
         remember {
-            OverlayCollector<HeatmapPointState, HeatmapPointFingerPrint>(
-                fingerPrintOf = { it.fingerPrint() },
+            OverlayCollector<HeatmapPointState>(
                 updateDebounce = Settings.Default.composeEventDebounce,
             )
         }
