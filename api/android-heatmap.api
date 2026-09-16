@@ -183,6 +183,7 @@ public final class com.mapconductor.heatmap.HeatmapPointState implements com.map
   public com.mapconductor.heatmap.HeatmapPointState(com.mapconductor.core.features.GeoPointInterface, double, java.lang.String, java.io.Serializable);
   public com.mapconductor.heatmap.HeatmapPointState(com.mapconductor.core.features.GeoPointInterface, double, java.lang.String, java.io.Serializable, int, kotlin.jvm.internal.DefaultConstructorMarker);
   public java.lang.String getId();
+  public com.mapconductor.core.StateMutationSignal getMutations();
   public final com.mapconductor.core.features.GeoPointInterface getPosition();
   public final void setPosition(com.mapconductor.core.features.GeoPointInterface);
   public final double getWeight();
@@ -190,7 +191,6 @@ public final class com.mapconductor.heatmap.HeatmapPointState implements com.map
   public final java.io.Serializable getExtra();
   public final void setExtra(java.io.Serializable);
   public final com.mapconductor.heatmap.HeatmapPointFingerPrint fingerPrint();
-  public final kotlinx.coroutines.flow.Flow<com.mapconductor.heatmap.HeatmapPointFingerPrint> asFlow();
 }
 public final class com.mapconductor.heatmap.HeatmapRenderBuffers {
   public com.mapconductor.heatmap.HeatmapRenderBuffers();
@@ -258,6 +258,7 @@ public final class com.mapconductor.heatmap.HeatmapTileRenderer implements com.m
   public final void update(java.util.List<com.mapconductor.heatmap.HeatmapPoint>, int, com.mapconductor.heatmap.HeatmapGradient, java.lang.Double);
   public final void updateCameraZoom(double);
   public byte[] renderTile(com.mapconductor.core.tileserver.TileRequest);
+  public byte[] renderTile(com.mapconductor.core.tileserver.TileRequest, kotlin.jvm.functions.Function0<java.lang.Boolean>);
   public com.mapconductor.heatmap.HeatmapTileRenderer();
 }
 public final class com.mapconductor.heatmap.HeatmapTileRenderer$Companion {
