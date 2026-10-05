@@ -1,14 +1,11 @@
 package com.mapconductor.heatmap
 
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.snapshotFlow
 import com.mapconductor.core.ComponentState
+import com.mapconductor.core.StateMutationSignal
 import com.mapconductor.core.features.GeoPointInterface
 import java.io.Serializable
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.distinctUntilChanged
 
 class HeatmapPointState(
     position: GeoPointInterface,
@@ -26,9 +23,15 @@ class HeatmapPointState(
             )
         ).toString()
 
-    var position by mutableStateOf(position)
-    var weight by mutableStateOf(weight)
-    var extra by mutableStateOf(extra)
+    /**
+     * Writes to the fields below are announced here rather than discovered by
+     * reading them all back. See [StateMutationSignal].
+     */
+    override val mutations = StateMutationSignal()
+
+    var position by mutations.notifying(position)
+    var weight by mutations.notifying(weight)
+    var extra by mutations.notifying(extra)
 
     private fun heatmapPointId(hashCodes: List<Int>): Int =
         hashCodes.reduce { result, hashCode ->
@@ -42,8 +45,6 @@ class HeatmapPointState(
             weight = weight.hashCode(),
             extra = extra?.hashCode() ?: 0,
         )
-
-    fun asFlow(): Flow<HeatmapPointFingerPrint> = snapshotFlow { fingerPrint() }.distinctUntilChanged()
 }
 
 data class HeatmapPointFingerPrint(
