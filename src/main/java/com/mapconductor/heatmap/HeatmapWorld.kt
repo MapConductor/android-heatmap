@@ -29,6 +29,12 @@ internal data class Bounds(
             maxX >= other.minX &&
             minY <= other.maxY &&
             maxY >= other.minY
+
+    /** 日付変更線の向こう側（x を 1 周ずらした位置）にある [other] とも重なるかを見る。 */
+    fun intersectsWrapped(other: Bounds): Boolean =
+        intersects(other) ||
+            intersects(other.copy(minX = other.minX - HeatmapWorld.WORLD_WIDTH, maxX = other.maxX - HeatmapWorld.WORLD_WIDTH)) ||
+            intersects(other.copy(minX = other.minX + HeatmapWorld.WORLD_WIDTH, maxX = other.maxX + HeatmapWorld.WORLD_WIDTH))
 }
 
 /**
