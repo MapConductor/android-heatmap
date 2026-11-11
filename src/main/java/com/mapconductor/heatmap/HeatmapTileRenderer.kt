@@ -242,7 +242,9 @@ class HeatmapTileRenderer(
                 minY = bounds.minY - padding,
                 maxY = bounds.maxY + padding,
             )
-        if (!tileBounds.intersects(paddedBounds)) return null
+        // 日付変更線をまたいだ点も余白ぶんは隣のタイルに掛かる（HeatmapTileBinner が回り込ませる）ので、
+        // ここで弾くときも 1 周ずらした位置と比べる。
+        if (!tileBounds.intersectsWrapped(paddedBounds)) return null
 
         val buffers = resetBuffers(gridDim)
         timings.let { it.setupMs = msSince(setupStartNs) }
