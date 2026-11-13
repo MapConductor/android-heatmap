@@ -5,6 +5,7 @@ public final class com.mapconductor.heatmap.Bounds {
   public final double getMinY();
   public final double getMaxY();
   public final boolean intersects(com.mapconductor.heatmap.Bounds);
+  public final boolean intersectsWrapped(com.mapconductor.heatmap.Bounds);
   public final double component1();
   public final double component2();
   public final double component3();
